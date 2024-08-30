@@ -98,14 +98,16 @@
         // Function to clean text and add a comma after each detected pattern
         function cleanTextAndAddCommaAfterPattern(input, pattern) {
             const regexPattern = new RegExp(pattern, 'g'); // Create a regex dynamically from detected pattern
-
+        
             // Replace the detected pattern with ',' and remove non-alphabetical characters except for commas
-            const cleanedText = input
+            let cleanedText = input
                 .replace(regexPattern, ',') // Replace each occurrence of the detected pattern with ','
                 .replace(/[^a-zA-Z,]+/g, ''); // Remove non-alphabetical characters except for commas
-
+        
             // Handle cases where there may be multiple commas next to each other or at the start or end
-            return cleanedText.replace(/,{2,}/g, ',').replace(/^,|,$/g, '');
+            cleanedText = cleanedText.replace(/,{2,}/g, ',').replace(/^,|,$/g, '');
+        
+            return cleanedText;
         }
 
         // Function to analyze the CSV data and populate the table
